@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <style>
+            /* .bgd {
+                text-align: center;
+                justify-content: center;
+            } */
+            .color{
+                background-color: rgb(221, 179, 186);
+            }
+        </style>
+        <body class="color">
+            <div class="bgd">
+                <%- include('common/header'); %>
+                <h1>Welcome <%= user.name %></h1>
+                <h2>email: <%= user.email %></h2>
+                <h2>skills:
+                    <ul>
+                        <% user.skills.forEach((item)=>{ %>
+                            <li><%= item %></li>
+                        <% }) %>
+                    </ul>
+                </h2>
+            </div>
+        </body>
+    </head>
+</html>
