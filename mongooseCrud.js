@@ -1,16 +1,29 @@
-const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/nodejs")
+const express = require("express");
+const mongoose = require("mongoose")
 
-const express_schema = new mongoose.Schema({
-    name: String,
-    price: Number
-});
 
 const main = async () => {
-    const express = mongoose.model('express', express_schema);
-    let data = new express({ name: 'tie', price: '10' });
-    const result = await data.save();
-    console.log(result);
+    await mongoose.connect("mongodb://localhost:27017/beebro");
+    const productSchema = new mongoose.Schema({
+        name: String,
+        gender: String
+    });
+    let productModel = mongoose.model("items", productSchema)
+    let data = new productModel({ name: "dulal", gender: "male" });
+    let result = await data.save();
+    console.log("....result", result);
 }
 
 main();
+
+
+const PORT = process.env.port || 4000;
+const app = express()
+
+app.get("/", (req, res) => {
+    res.send("hello")
+})
+
+app.listen(PORT, () => {
+    console.log(`${PORT} is running`);
+})

@@ -2,7 +2,7 @@ const express = require('express')
 const mysql = require("mysql")
 const bodyParser = require("body-parser")
 const app = express()
-const port = 3001;
+const port = process.env.PORT || 3001;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json())
@@ -29,14 +29,14 @@ app.get("/", (req, res) => {
     // let sql = "SELECT Person.PersonID,Person.FirstName, saheb.orderName FROM saheb RIGHT JOIN Person ON saheb.orderID=Person.PersonID"
     // let sql = "SELECT Person.PersonID,Person.FirstName, saheb.orderName FROM Person FULL OUTER JOIN saheb ON saheb.orderId=Person.PersonID";
     // let sql = "SELECT COUNT(PersonID) from Person";
-    conn.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("data reterived", result)
-    })
-    res.send("Hello Users...")
-    // conn.query("Select * from profile_user_profile",(err,result)=>{
-    //     console.log("result",result)
+    // conn.query(sql, function (err, result) {
+    //     if (err) throw err;
+    //     console.log("data reterived", result)
     // })
+    res.send("Hello Users...")
+    conn.query("Select * from profile_user_profile",(err,result)=>{
+        console.log("result",result)
+    })
 })
 
 
