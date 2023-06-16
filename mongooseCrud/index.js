@@ -18,6 +18,17 @@ app.get('/', async (req, res) => {
     res.send({ 'result': result });
 })
 
+app.get('/search/:key',async(req,res) =>{
+    console.log(req.params.key)
+    let result = await Product.find({
+        "$or":[
+            {"name":{$regex:req.params.key}}
+        ]
+    })
+    console.log(result)
+    res.send({ 'result': result });
+})
+
 app.delete('/:_id', async (req, res) => {
     console.log(req.params)
     let result = await Product.deleteOne(req.params);
